@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        node {
+            label ''
+            customWorkspace "/tmp/voltio-workspaces/${env.JOB_NAME}"
+        }
+    }
     tools { nodejs 'node24' }
     options {
         skipDefaultCheckout(true)

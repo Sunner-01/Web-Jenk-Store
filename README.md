@@ -63,6 +63,8 @@ El despliegue es **local de laboratorio**: exportación estática copiada a un d
 
 Direcciones: Jenkins http://localhost:8081 · tienda desplegada http://localhost:3001 · desarrollo http://localhost:3000. `http://localhost:3001/deployment.json` permite comparar el SHA publicado con el commit de Jenkins.
 
+Las compilaciones usan un workspace temporal Linux dentro del contenedor para evitar que la copia de miles de archivos de dependencias sobre Windows haga lenta la exposición. Los datos persistentes, el código fuente de desarrollo y la tienda publicada siguen en `D:\Jenkins-Pract`. Al recrear Jenkins se reconstruye su workspace; los artefactos archivados se conservan en `jenkins_home`.
+
 ## Referencias
 
 - [Next.js: exportación estática](https://nextjs.org/docs/app/guides/static-exports)

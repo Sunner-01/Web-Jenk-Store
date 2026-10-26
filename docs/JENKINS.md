@@ -14,6 +14,8 @@ Integrantes -> git push -> GitHub/main <- consulta periódica de Jenkins
 
 Docker Desktop ejecuta Jenkins y Nginx. Java viene dentro de la imagen de Jenkins. El plugin NodeJS instala Node/npm en el JENKINS_HOME persistente. Jenkins ejecuta los trabajos en su nodo integrado, una simplificación de laboratorio; en producción se separan los agentes. No se monta el socket Docker ni se ejecuta Docker-in-Docker.
 
+El checkout y node_modules del pipeline usan `/tmp/voltio-workspaces/JOB_NAME` dentro del contenedor. Evita el costo de miles de operaciones pequeñas sobre el directorio compartido de Windows. Es una copia temporal reconstruible: al recrear el contenedor se pierde y el siguiente build la vuelve a crear. Las fuentes del desarrollador permanecen en `D:\Jenkins-Pract\Web-Jenk-Store`, los reportes archivados y configuración en `jenkins_home`, y la publicación en `deployment`.
+
 ## Archivos del host
 
 El Compose activo está en `D:\Jenkins-Pract\compose.yaml`. El ejemplo `infra/compose.yaml` se copia a esa ubicación: sus rutas se calculan desde allí. No arrancarlo directamente desde `infra/`, porque usaría otros directorios.
